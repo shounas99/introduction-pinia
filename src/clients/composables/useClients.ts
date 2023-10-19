@@ -8,9 +8,9 @@ import clientsApi from "@/api/clients-api";
 import type { Client } from '@/clients/interfaces/client';
 
 const getClients = async( page: number ):Promise<Client[]> => {
-    //Va a esperar 1s y medio antes de realizar la petición y cargar la nueva data
+    //Va a esperar 2s y medio antes de realizar la petición y cargar la nueva data
     // await new Promise( resolve => {
-    //     setTimeout( () => resolve(true), 1500)
+    //     setTimeout( () => resolve(true), 2500)
     // });
 
     const { data } = await clientsApi.get<Client[]>(`/clients?_page=${ page }`)
@@ -37,8 +37,8 @@ const useClients = () => {
     //si no es undefined la data, aqui la establece
     watch( data, clients => {
         if ( clients )
-        store.setClients( clients )
-    })
+            store.setClients( clients )
+    }, { immediate: true })
 
 
     return {
